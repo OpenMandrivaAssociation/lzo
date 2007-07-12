@@ -2,8 +2,9 @@
 %define version 2.02
 %define release %mkrel 1
 
-%define major 2_2
-%define libname %mklibname lzo %{major}
+%define major 2
+%define apiver 2
+%define libname %mklibname lzo %{apiver} %{major}
 %define develname %mklibname lzo -d
 
 Summary:	Data compression library with very fast (de-)compression
@@ -84,4 +85,5 @@ rm -rf %{buildroot}
 %defattr (-,root,root)
 %{_libdir}/*.a
 %{_libdir}/*.so
+%{_libdir}/*.la
 %{_includedir}/* 
