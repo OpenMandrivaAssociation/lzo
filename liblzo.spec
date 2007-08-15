@@ -1,6 +1,6 @@
 %define name liblzo
 %define version 2.02
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 2
 %define apiver 2
@@ -42,6 +42,7 @@ Group:		Development/C
 Requires:	%{libname} = %{version}
 Provides:	%{name}2-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
+Obsoletes:	%mklibname lzo 2_2 -d
 
 %description -n %{develname}
 LZO is a portable lossless data compression library written in ANSI C.
@@ -79,7 +80,7 @@ rm -rf %{buildroot}
 %defattr (-,root,root)
 %doc doc/*
 %doc AUTHORS COPYING INSTALL NEWS README THANKS
-%{_libdir}/*.so.%{major}*
+%{_libdir}/*%{apiver}.so.%{major}*
 
 %files -n %{develname}
 %defattr (-,root,root)
