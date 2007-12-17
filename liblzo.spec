@@ -11,7 +11,6 @@ License:	GPL
 URL:		http://www.oberhumer.com/opensource/lzo/
 Source:		http://www.oberhumer.com/opensource/lzo/download/lzo-%version.tar.bz2
 Group:		System/Libraries
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 LZO is a portable lossless data compression library written in ANSI C. 
