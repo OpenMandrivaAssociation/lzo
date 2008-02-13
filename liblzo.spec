@@ -61,7 +61,7 @@ make test
 %install
 rm -rf %{buildroot}
 %makeinstall_std
-install -m755 lzotest/lzotest -D %{_binddir}/lzotest
+install -m755 lzotest/lzotest -D %{buildroot}%{_bindir}/lzotest
 
 %post -n %{libname} -p /sbin/ldconfig
 
