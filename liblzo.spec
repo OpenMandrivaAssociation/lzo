@@ -6,7 +6,7 @@
 Summary:	Data compression library with very fast (de-)compression
 Name:		liblzo
 Version:	2.02
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	GPL
 URL:		http://www.oberhumer.com/opensource/lzo/
 Source:		http://www.oberhumer.com/opensource/lzo/download/lzo-%version.tar.bz2
@@ -20,7 +20,7 @@ Decompression requires no memory. In addition there are slower
 compression levels achieving a quite competitive compression ratio while 
 still decompressing at this very high speed.
 
-%package -n %{libname}
+%package -n	%{libname}
 Summary:	Data compression library with very fast (de-)compression
 Group:		System/Libraries
 Provides:	%{name}
@@ -32,7 +32,7 @@ Decompression requires no memory. In addition there are slower
 compression levels achieving a quite competitive compression ratio while
 still decompressing at this very high speed.
 
-%package -n %{develname}
+%package -n	%{develname}
 Summary:	Headers files of liblzo library
 Group:		Development/C
 Requires:	%{libname} = %{version}
@@ -51,10 +51,7 @@ still decompressing at this very high speed.
 %setup -qn lzo-%{version}
 
 %build
-
-%configure2_5x \
-	--enable-shared
-
+%configure2_5x	--enable-shared
 %make
 
 %check
@@ -64,6 +61,7 @@ make test
 %install
 rm -rf %{buildroot}
 %makeinstall_std
+install -m755 lzotest/lzotest -D %{_binddir}/lzotest
 
 %post -n %{libname} -p /sbin/ldconfig
 
@@ -74,12 +72,13 @@ rm -rf %{buildroot}
 
 %files -n %{libname}
 %defattr (-,root,root)
-%doc doc/*
-%doc AUTHORS COPYING INSTALL NEWS README THANKS
+%doc AUTHORS NEWS README THANKS doc/LZO.TXT doc/LZO.FAQ
 %{_libdir}/*%{apiver}.so.%{major}*
 
 %files -n %{develname}
 %defattr (-,root,root)
+%doc doc/LZOAPI.TXT doc/LZOTEST.TXT
+%{_bindir}/lzotest
 %{_libdir}/*.a
 %{_libdir}/*.so
 %{_libdir}/*.la
