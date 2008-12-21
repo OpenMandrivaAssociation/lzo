@@ -5,12 +5,13 @@
 
 Summary:	Data compression library with very fast (de-)compression
 Name:		liblzo
-Version:	2.02
-Release:	%mkrel 5
+Version:	2.03
+Release:	%mkrel 1
 License:	GPL
-URL:		http://www.oberhumer.com/opensource/lzo/
-Source:		http://www.oberhumer.com/opensource/lzo/download/lzo-%version.tar.bz2
 Group:		System/Libraries
+URL:		http://www.oberhumer.com/opensource/lzo/
+Source0:	http://www.oberhumer.com/opensource/lzo/download/lzo-%version.tar.gz
+Patch0:		lzo-2.03-format_not_a_string_literal_and_no_format_arguments.diff
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
@@ -48,7 +49,9 @@ compression levels achieving a quite competitive compression ratio while
 still decompressing at this very high speed.                    
 
 %prep
+
 %setup -qn lzo-%{version}
+%patch0 -p0 -b .format_not_a_string_literal_and_no_format_arguments
 
 %build
 %configure2_5x	--enable-shared
