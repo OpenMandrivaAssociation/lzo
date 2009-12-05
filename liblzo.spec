@@ -3,16 +3,21 @@
 %define libname %mklibname lzo %{apiver} %{major}
 %define develname %mklibname lzo -d
 
+%bcond_without	uclibc
+
 Summary:	Data compression library with very fast (de-)compression
 Name:		liblzo
 Version:	2.03
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	GPLv2
 Group:		System/Libraries
 URL:		http://www.oberhumer.com/opensource/lzo/
 Source0:	http://www.oberhumer.com/opensource/lzo/download/lzo-%version.tar.gz
 Patch0:		lzo-2.03-format_not_a_string_literal_and_no_format_arguments.diff
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
+%if %{with uclibc}
+BuildRequires:	uClibc-devel
+%endif
 
 %description
 LZO is a portable lossless data compression library written in ANSI C. 
@@ -53,17 +58,35 @@ still decompressing at this very high speed.
 %patch0 -p0 -b .format_not_a_string_literal_and_no_format_arguments
 
 %build
+export CONFIGURE_TOP=`pwd`
+%if %{with uclibc}
+mkdir -p uclibc
+cd uclibc
+%configure2_5x	CC="%{uclibc_cc}" \
+		CFLAGS="%{uclibc_cflags}" \
+		--disable-shared
+%make
+cd ..
+%endif
+
+mkdir -p shared
+cd shared
 %configure2_5x	--enable-shared
 %make
+cd ..
 
 %check
+cd shared
 make check
 make test
 
 %install
 rm -rf %{buildroot}
-%makeinstall_std
-install -m755 lzotest/lzotest -D %{buildroot}%{_bindir}/lzotest
+%if %{with uclibc}
+install -m644 uclibc/src/.libs/liblzo2.a -D %{buildroot}%{uclibc_root}%{_libdir}/liblzo.a
+%endif
+%makeinstall_std -C shared
+install -m755 shared/lzotest/lzotest -D %{buildroot}%{_bindir}/lzotest
 
 %if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
@@ -86,6 +109,9 @@ rm -rf %{buildroot}
 %doc doc/LZOAPI.TXT doc/LZOTEST.TXT
 %{_bindir}/lzotest
 %{_libdir}/*.a
+%if %{with uclibc}
+%{uclibc_root}%{_libdir}/*.a
+%endif
 %{_libdir}/*.so
 %{_libdir}/*.la
 %{_includedir}/* 
