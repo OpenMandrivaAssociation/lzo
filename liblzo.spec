@@ -7,13 +7,12 @@
 
 Summary:	Data compression library with very fast (de-)compression
 Name:		liblzo
-Version:	2.03
-Release:	%mkrel 4
+Version:	2.04
+Release:	%mkrel 1
 License:	GPLv2
 Group:		System/Libraries
 URL:		http://www.oberhumer.com/opensource/lzo/
 Source0:	http://www.oberhumer.com/opensource/lzo/download/lzo-%version.tar.gz
-Patch0:		lzo-2.03-format_not_a_string_literal_and_no_format_arguments.diff
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 %if %{with uclibc}
 BuildRequires:	uClibc-devel
@@ -55,7 +54,6 @@ still decompressing at this very high speed.
 
 %prep
 %setup -qn lzo-%{version}
-%patch0 -p0 -b .format_not_a_string_literal_and_no_format_arguments
 
 %build
 export CONFIGURE_TOP=`pwd`
