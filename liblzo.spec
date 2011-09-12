@@ -7,8 +7,8 @@
 
 Summary:	Data compression library with very fast (de-)compression
 Name:		liblzo
-Version:	2.04
-Release:	%mkrel 4
+Version:	2.06
+Release:	%mkrel 1
 License:	GPLv2
 Group:		System/Libraries
 URL:		http://www.oberhumer.com/opensource/lzo/
@@ -85,6 +85,7 @@ install -m644 uclibc/src/.libs/liblzo2.a -D %{buildroot}%{uclibc_root}%{_libdir}
 %endif
 %makeinstall_std -C shared
 install -m755 shared/lzotest/lzotest -D %{buildroot}%{_bindir}/lzotest
+rm -rf %{buildroot}%{_datadir}/doc/lzo
 
 %if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
