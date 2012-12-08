@@ -13,7 +13,6 @@ License:	GPLv2
 Group:		System/Libraries
 URL:		http://www.oberhumer.com/opensource/lzo/
 Source0:	http://www.oberhumer.com/opensource/lzo/download/lzo-%version.tar.gz
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 %if %{with uclibc}
 BuildRequires:	uClibc-devel
 %endif
@@ -87,24 +86,11 @@ install -m644 uclibc/src/.libs/liblzo2.a -D %{buildroot}%{uclibc_root}%{_libdir}
 install -m755 shared/lzotest/lzotest -D %{buildroot}%{_bindir}/lzotest
 rm -rf %{buildroot}%{_datadir}/doc/lzo
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
-
 %files -n %{libname}
-%defattr (-,root,root)
 %doc AUTHORS NEWS README THANKS doc/LZO.TXT doc/LZO.FAQ
 %{_libdir}/*%{apiver}.so.%{major}*
 
 %files -n %{develname}
-%defattr (-,root,root)
 %doc doc/LZOAPI.TXT doc/LZOTEST.TXT
 %{_bindir}/lzotest
 %{_libdir}/*.a
@@ -112,5 +98,4 @@ rm -rf %{buildroot}
 %{uclibc_root}%{_libdir}/*.a
 %endif
 %{_libdir}/*.so
-%{_libdir}/*.la
 %{_includedir}/* 
