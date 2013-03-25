@@ -55,6 +55,7 @@ still decompressing at this very high speed.
 %setup -qn lzo-%{version}
 
 %build
+autoreconf -fi
 export CONFIGURE_TOP=`pwd`
 %if %{with uclibc}
 mkdir -p uclibc
