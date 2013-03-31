@@ -1,7 +1,7 @@
-%define major 2
-%define apiver 2
-%define libname %mklibname lzo %{apiver} %{major}
-%define develname %mklibname lzo -d
+%define	major	2
+%define	apiver	2
+%define	libname	%mklibname lzo %{apiver} %{major}
+%define	devname	%mklibname lzo -d
 
 %bcond_without	uclibc
 
@@ -46,7 +46,7 @@ Decompression requires no memory. In addition there are slower
 compression levels achieving a quite competitive compression ratio while
 still decompressing at this very high speed.
 
-%package -n	%{develname}
+%package -n	%{devname}
 Summary:	Headers files of liblzo2 library
 Group:		Development/C
 Requires:	%{libname} = %{version}
@@ -57,7 +57,7 @@ Provides:	%{name}2-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Obsoletes:	%mklibname lzo 2_2 -d
 
-%description -n %{develname}
+%description -n %{devname}
 LZO is a portable lossless data compression library written in ANSI C.
 It offers pretty fast compression and *very* fast decompression.
 Decompression requires no memory. In addition there are slower
@@ -118,7 +118,7 @@ rm -rf %{buildroot}{%{uclibc_root},}%{_datadir}/doc/lzo
 %{uclibc_root}/%{_lib}/*%{apiver}.so.%{major}*
 %endif
 
-%files -n %{develname}
+%files -n %{devname}
 %doc AUTHORS NEWS README THANKS doc/LZO.TXT doc/LZO.FAQ
 %{_bindir}/lzotest
 %{_libdir}/*.a
