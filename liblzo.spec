@@ -6,7 +6,7 @@
 %bcond_without	uclibc
 
 Summary:	Data compression library with very fast (de-)compression
-Name:		liblzo
+Name:		liblzo2
 Version:	2.06
 Release:	3
 License:	GPLv2
@@ -47,7 +47,7 @@ compression levels achieving a quite competitive compression ratio while
 still decompressing at this very high speed.
 
 %package -n	%{develname}
-Summary:	Headers files of liblzo library
+Summary:	Headers files of liblzo2 library
 Group:		Development/C
 Requires:	%{libname} = %{version}
 %if %{with uclibc}
@@ -93,17 +93,29 @@ make test
 %install
 %if %{with uclibc}
 %makeinstall_std -C uclibc
+
+rm %{buildroot}%{uclibc_root}%{_libdir}/liblzo2.so
+mkdir -p %{buildroot}%{uclibc_root}/%{_lib}
+mv %{buildroot}%{uclibc_root}%{_libdir}/liblzo2.so.%{major}* %{buildroot}%{uclibc_root}/%{_lib}
+ln -sr %{buildroot}%{uclibc_root}/%{_lib}/liblzo2.so.%{major}.* %{buildroot}%{uclibc_root}%{_libdir}/liblzo2.so
 %endif
+
 %makeinstall_std -C shared
+
+rm %{buildroot}%{_libdir}/liblzo2.so
+mkdir -p %{buildroot}/%{_lib}
+mv %{buildroot}%{_libdir}/liblzo2.so.%{major}* %{buildroot}/%{_lib}
+ln -sr %{buildroot}/%{_lib}/liblzo2.so.%{major}.* %{buildroot}%{_libdir}/liblzo2.so
+
 install -m755 shared/lzotest/lzotest -D %{buildroot}%{_bindir}/lzotest
 rm -rf %{buildroot}{%{uclibc_root},}%{_datadir}/doc/lzo
 
 %files -n %{libname}
-%{_libdir}/*%{apiver}.so.%{major}*
+/%{_lib}/*%{apiver}.so.%{major}*
 
 %if %{with uclibc}
 %files -n uclibc-%{libname}
-%{uclibc_root}%{_libdir}/*%{apiver}.so.%{major}*
+%{uclibc_root}/%{_lib}/*%{apiver}.so.%{major}*
 %endif
 
 %files -n %{develname}
