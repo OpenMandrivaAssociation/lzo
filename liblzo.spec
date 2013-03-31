@@ -27,7 +27,6 @@ still decompressing at this very high speed.
 %package -n	%{libname}
 Summary:	Data compression library with very fast (de-)compression
 Group:		System/Libraries
-Provides:	%{name}
 
 %description -n %{libname}
 LZO is a portable lossless data compression library written in ANSI C.
