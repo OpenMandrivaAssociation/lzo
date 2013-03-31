@@ -35,6 +35,17 @@ Decompression requires no memory. In addition there are slower
 compression levels achieving a quite competitive compression ratio while
 still decompressing at this very high speed.
 
+%package -n	uclibc-%{libname}
+Summary:	Data compression library with very fast (de-)compression (uClibc build)
+Group:		System/Libraries
+
+%description -n uclibc-%{libname}
+LZO is a portable lossless data compression library written in ANSI C.
+It offers pretty fast compression and *very* fast decompression.
+Decompression requires no memory. In addition there are slower
+compression levels achieving a quite competitive compression ratio while
+still decompressing at this very high speed.
+
 %package -n	%{develname}
 Summary:	Headers files of liblzo library
 Group:		Development/C
@@ -51,7 +62,7 @@ LZO is a portable lossless data compression library written in ANSI C.
 It offers pretty fast compression and *very* fast decompression.
 Decompression requires no memory. In addition there are slower
 compression levels achieving a quite competitive compression ratio while
-still decompressing at this very high speed.                    
+still decompressing at this very high speed.
 
 %prep
 %setup -qn lzo-%{version}
@@ -62,9 +73,8 @@ export CONFIGURE_TOP=`pwd`
 %if %{with uclibc}
 mkdir -p uclibc
 cd uclibc
-%configure2_5x	CC="%{uclibc_cc}" \
-		CFLAGS="%{uclibc_cflags}" \
-		--disable-shared
+%uclibc_configure \
+		--enable-shared
 %make
 cd ..
 %endif
@@ -82,21 +92,27 @@ make test
 
 %install
 %if %{with uclibc}
-install -m644 uclibc/src/.libs/liblzo2.a -D %{buildroot}%{uclibc_root}%{_libdir}/liblzo.a
+%makeinstall_std -C uclibc
 %endif
 %makeinstall_std -C shared
 install -m755 shared/lzotest/lzotest -D %{buildroot}%{_bindir}/lzotest
-rm -rf %{buildroot}%{_datadir}/doc/lzo
+rm -rf %{buildroot}{%{uclibc_root},}%{_datadir}/doc/lzo
 
 %files -n %{libname}
 %{_libdir}/*%{apiver}.so.%{major}*
+
+%if %{with uclibc}
+%files -n uclibc-%{libname}
+%{uclibc_root}%{_libdir}/*%{apiver}.so.%{major}*
+%endif
 
 %files -n %{develname}
 %doc AUTHORS NEWS README THANKS doc/LZO.TXT doc/LZO.FAQ
 %{_bindir}/lzotest
 %{_libdir}/*.a
+%{_libdir}/*.so
 %if %{with uclibc}
 %{uclibc_root}%{_libdir}/*.a
+%{uclibc_root}%{_libdir}/*.so
 %endif
-%{_libdir}/*.so
 %{_includedir}/* 
