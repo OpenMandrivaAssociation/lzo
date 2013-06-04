@@ -1,6 +1,6 @@
+%define	api	2
 %define	major	2
-%define	apiver	2
-%define	libname	%mklibname lzo %{apiver} %{major}
+%define	libname	%mklibname lzo %{api} %{major}
 %define	devname	%mklibname lzo -d
 
 %bcond_without	uclibc
@@ -11,7 +11,7 @@ Version:	2.06
 Release:	4
 License:	GPLv2
 Group:		System/Libraries
-URL:		http://www.oberhumer.com/opensource/lzo/
+Url:		http://www.oberhumer.com/opensource/lzo/
 Source0:	http://www.oberhumer.com/opensource/lzo/download/lzo-%version.tar.gz
 %if %{with uclibc}
 BuildRequires:	uClibc-devel
@@ -53,7 +53,6 @@ Requires:	%{libname} = %{version}
 %if %{with uclibc}
 Requires:	uclibc-%{libname} = %{version}
 %endif
-Provides:	%{name}2-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Obsoletes:	%mklibname lzo 2_2 -d
 
@@ -74,14 +73,16 @@ export CONFIGURE_TOP=`pwd`
 mkdir -p uclibc
 cd uclibc
 %uclibc_configure \
-		--enable-shared
+	--enable-shared
 %make
 cd ..
 %endif
 
 mkdir -p shared
 cd shared
-%configure2_5x	--enable-shared
+%configure2_5x \
+	--enable-shared
+	--disable-static
 %make
 cd ..
 
@@ -111,17 +112,16 @@ install -m755 shared/lzotest/lzotest -D %{buildroot}%{_bindir}/lzotest
 rm -rf %{buildroot}{%{uclibc_root},}%{_datadir}/doc/lzo
 
 %files -n %{libname}
-/%{_lib}/*%{apiver}.so.%{major}*
+/%{_lib}/liblzo%{api}.so.%{major}*
 
 %if %{with uclibc}
 %files -n uclibc-%{libname}
-%{uclibc_root}/%{_lib}/*%{apiver}.so.%{major}*
+%{uclibc_root}/%{_lib}/liblzo%{api}.so.%{major}*
 %endif
 
 %files -n %{devname}
 %doc AUTHORS NEWS README THANKS doc/LZO.TXT doc/LZO.FAQ
 %{_bindir}/lzotest
-%{_libdir}/*.a
 %{_libdir}/*.so
 %if %{with uclibc}
 %{uclibc_root}%{_libdir}/*.a
