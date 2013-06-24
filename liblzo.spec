@@ -81,7 +81,7 @@ cd ..
 mkdir -p shared
 cd shared
 %configure2_5x \
-	--enable-shared
+	--enable-shared \
 	--disable-static
 %make
 cd ..
