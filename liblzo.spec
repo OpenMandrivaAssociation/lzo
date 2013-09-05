@@ -73,7 +73,8 @@ export CONFIGURE_TOP=`pwd`
 mkdir -p uclibc
 cd uclibc
 %uclibc_configure \
-	--enable-shared
+	--enable-shared \
+	--enable-static
 %make
 cd ..
 %endif
