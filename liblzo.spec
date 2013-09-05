@@ -8,7 +8,7 @@
 Summary:	Data compression library with very fast (de-)compression
 Name:		liblzo
 Version:	2.06
-Release:	4
+Release:	5
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.oberhumer.com/opensource/lzo/
@@ -53,7 +53,7 @@ Requires:	%{libname} = %{version}
 %if %{with uclibc}
 Requires:	uclibc-%{libname} = %{version}
 %endif
-Provides:	%{name}-devel = %{version}-%{release}
+Provides:	lzo-devel = %{version}-%{release}
 Obsoletes:	%mklibname lzo 2_2 -d
 
 %description -n %{devname}
