@@ -1,14 +1,14 @@
-%define	api	2
-%define	major	2
-%define	libname	%mklibname lzo %{api} %{major}
-%define	devname	%mklibname lzo -d
+%define api 2
+%define major 2
+%define libname %mklibname lzo %{api} %{major}
+%define devname %mklibname lzo -d
 
-%bcond_without	uclibc
+%bcond_without uclibc
 
 Summary:	Data compression library with very fast (de-)compression
 Name:		liblzo
 Version:	2.06
-Release:	14
+Release:	15
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.oberhumer.com/opensource/lzo/
@@ -81,7 +81,7 @@ cd ..
 
 mkdir -p shared
 cd shared
-%configure2_5x \
+%configure \
 	--enable-shared \
 	--disable-static
 %make
