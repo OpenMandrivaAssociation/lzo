@@ -65,7 +65,6 @@ still decompressing at this very high speed.
 
 %prep
 %setup -qn lzo-%{version}
-autoreconf -fi
 
 %build
 export CONFIGURE_TOP=`pwd`
