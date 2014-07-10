@@ -1,0 +1,11 @@
+--- lzo-2.07/include/lzo/lzodefs.h.omv~	2014-07-10 10:06:31.415023628 +0000
++++ lzo-2.07/include/lzo/lzodefs.h	2014-07-10 10:06:39.894917615 +0000
+@@ -29,6 +29,8 @@
+ #ifndef __LZODEFS_H_INCLUDED
+ #define __LZODEFS_H_INCLUDED 1
+ 
++#include <limits.h>
++
+ #if defined(__CYGWIN32__) && !defined(__CYGWIN__)
+ #  define __CYGWIN__ __CYGWIN32__
+ #endif
