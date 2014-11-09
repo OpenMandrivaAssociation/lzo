@@ -1,4 +1,5 @@
 removed_sources:
   lzo-2.06.tar.gz: a11768b8a168ec607750842bbef406f11547b904
-sources:
   lzo-2.07.tar.gz: 3051f622f8898c41f673955cb8e449e774c6ccc5
+sources:
+  lzo-2.08.tar.gz: 64c3e44843a44ffc4533aa89e41516f42bfefa76

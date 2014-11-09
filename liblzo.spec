@@ -7,8 +7,8 @@
 
 Summary:	Data compression library with very fast (de-)compression
 Name:		liblzo
-Version:	2.07
-Release:	2
+Version:	2.08
+Release:	1
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.oberhumer.com/opensource/lzo/
@@ -25,7 +25,7 @@ Decompression requires no memory. In addition there are slower
 compression levels achieving a quite competitive compression ratio while 
 still decompressing at this very high speed.
 
-%package -n	%{libname}
+%package -n %{libname}
 Summary:	Data compression library with very fast (de-)compression
 Group:		System/Libraries
 
@@ -36,7 +36,8 @@ Decompression requires no memory. In addition there are slower
 compression levels achieving a quite competitive compression ratio while
 still decompressing at this very high speed.
 
-%package -n	uclibc-%{libname}
+%if %{with uclibc}
+%package -n uclibc-%{libname}
 Summary:	Data compression library with very fast (de-)compression (uClibc build)
 Group:		System/Libraries
 
@@ -46,8 +47,9 @@ It offers pretty fast compression and *very* fast decompression.
 Decompression requires no memory. In addition there are slower
 compression levels achieving a quite competitive compression ratio while
 still decompressing at this very high speed.
+%endif
 
-%package -n	%{devname}
+%package -n %{devname}
 Summary:	Headers files of liblzo2 library
 Group:		Development/C
 Requires:	%{libname} = %{version}
