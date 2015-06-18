@@ -8,7 +8,7 @@
 Summary:	Data compression library with very fast (de-)compression
 Name:		liblzo
 Version:	2.08
-Release:	2
+Release:	4
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.oberhumer.com/opensource/lzo/
@@ -85,6 +85,7 @@ cd ..
 
 mkdir -p shared
 cd shared
+CFLAGS="%{optflags} -Ofast" CXXLAGS="%{optflags} -Ofast" \
 %configure \
 	--enable-shared \
 	--disable-static
