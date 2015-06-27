@@ -8,7 +8,7 @@
 Summary:	Data compression library with very fast (de-)compression
 Name:		liblzo
 Version:	2.08
-Release:	5
+Release:	6
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.oberhumer.com/opensource/lzo/
@@ -54,8 +54,8 @@ Summary:	Headers files of liblzo2 library
 Group:		Development/C
 Requires:	%{devname} = %{EVRD}
 Requires:	uclibc-%{libname} = %{EVRD}
-Provides:	uclicb-liblzo-devel = %{EVRD}
-Provides:	uclicb-lzo-devel = %{EVRD}
+Provides:	uclibc-liblzo-devel = %{EVRD}
+Provides:	uclibc-lzo-devel = %{EVRD}
 Conflicts:	%{devname} < 2.08-5
 
 %description -n uclibc-%{devname}
