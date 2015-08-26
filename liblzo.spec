@@ -3,12 +3,12 @@
 %define libname %mklibname lzo %{api} %{major}
 %define devname %mklibname lzo -d
 
-%bcond_without uclibc
+%bcond_with uclibc
 
 Summary:	Data compression library with very fast (de-)compression
 Name:		liblzo
 Version:	2.08
-Release:	8
+Release:	9
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.oberhumer.com/opensource/lzo/
