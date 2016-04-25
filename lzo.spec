@@ -73,8 +73,8 @@ mkdir -p %{buildroot}/%{_lib}
 mv %{buildroot}%{_libdir}/liblzo2.so.%{major}* %{buildroot}/%{_lib}
 ln -sr %{buildroot}/%{_lib}/liblzo2.so.%{major}.* %{buildroot}%{_libdir}/liblzo2.so
 
-install -m755 shared/lzotest/lzotest -D %{buildroot}%{_bindir}/lzotest
-rm -rf %{buildroot}{%{uclibc_root},}%{_datadir}/doc/lzo
+install -m755 lzotest/lzotest -D %{buildroot}%{_bindir}/lzotest
+rm -rf %{buildroot}%{_datadir}/doc/lzo
 
 %files -n %{libname}
 /%{_lib}/liblzo%{api}.so.%{major}*
