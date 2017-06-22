@@ -5,7 +5,7 @@
 
 Summary:	Data compression library with very fast (de-)compression
 Name:		lzo
-Version:	2.09
+Version:	2.10
 Release:	1
 License:	GPLv2
 Group:		System/Libraries
@@ -84,3 +84,4 @@ rm -rf %{buildroot}%{_datadir}/doc/lzo
 %{_bindir}/lzotest
 %{_libdir}/*.so
 %{_includedir}/*
+%{_libdir}/pkgconfig/*.pc
