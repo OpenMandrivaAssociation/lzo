@@ -84,3 +84,4 @@ rm -rf %{buildroot}%{_datadir}/doc/lzo
 %{_bindir}/lzotest
 %{_libdir}/*.so
 %{_includedir}/*
+%{_libdir}/pkgconfig/*.pc
