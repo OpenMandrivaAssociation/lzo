@@ -3,10 +3,12 @@
 %define libname %mklibname %{name} %{api} %{major}
 %define devname %mklibname %{name} -d
 
+%global optflags %{optflags} -O3
+
 Summary:	Data compression library with very fast (de-)compression
 Name:		lzo
 Version:	2.10
-Release:	3
+Release:	4
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.oberhumer.com/opensource/lzo/
@@ -47,26 +49,22 @@ compression levels achieving a quite competitive compression ratio while
 still decompressing at this very high speed.
 
 %prep
-%setup -qn lzo-%{version}
-%apply_patches
+%autosetup -n lzo-%{version} -p1
 autoreconf -fi
 
 %build
-export CFLAGS="%{optflags} -Ofast"
-export CXXLAGS="%{optflags} -Ofast"
-
 %configure \
 	--enable-shared \
 	--disable-static
 
-%make
+%make_build
 
 %check
 make check
 make test
 
 %install
-%makeinstall_std
+%make_install
 
 rm %{buildroot}%{_libdir}/liblzo2.so
 mkdir -p %{buildroot}/%{_lib}
