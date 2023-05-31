@@ -7,9 +7,11 @@
 
 %define api 2
 %define major 2
-%define libname %mklibname %{name} %{api} %{major}
+%define libname %mklibname %{name} %{api}
+%define oldlibname %mklibname %{name} %{api} %{major}
 %define devname %mklibname %{name} -d
-%define lib32name %mklib32name %{name} %{api} %{major}
+%define lib32name %mklib32name %{name} %{api}
+%define oldlib32name %mklib32name %{name} %{api} %{major}
 %define dev32name %mklib32name %{name} -d
 
 %global optflags %{optflags} -O3
@@ -17,7 +19,7 @@
 Summary:	Data compression library with very fast (de-)compression
 Name:		lzo
 Version:	2.10
-Release:	7
+Release:	8
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.oberhumer.com/opensource/lzo/
@@ -35,6 +37,7 @@ still decompressing at this very high speed.
 %package -n %{libname}
 Summary:	Data compression library with very fast (de-)compression
 Group:		System/Libraries
+%rename %{oldlibname}
 
 %description -n %{libname}
 LZO is a portable lossless data compression library written in ANSI C.
@@ -61,6 +64,7 @@ still decompressing at this very high speed.
 %package -n %{lib32name}
 Summary:	Data compression library with very fast (de-)compression (32-bit)
 Group:		System/Libraries
+%rename %{oldlib32name}
 
 %description -n %{lib32name}
 LZO is a portable lossless data compression library written in ANSI C.
@@ -105,11 +109,13 @@ cd build
 %endif
 %make_build -C build
 
+%if ! %{cross_compiling}
 %check
 %if %{with compat32}
 make -C build32 check test
 %endif
 make -C build check test
+%endif
 
 %install
 %if %{with compat32}
