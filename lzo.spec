@@ -26,6 +26,9 @@ Url:		http://www.oberhumer.com/opensource/lzo/
 Source0:	http://www.oberhumer.com/opensource/lzo/download/%{name}-%version.tar.gz
 Source1:	%{name}.rpmlintrc
 Patch0:		lzo-2.07-buildfix.patch
+%if %{with compat32}
+BuildRequires:	libc6
+%endif
 
 %description
 LZO is a portable lossless data compression library written in ANSI C. 
