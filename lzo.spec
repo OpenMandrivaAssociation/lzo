@@ -22,7 +22,7 @@ Version:	2.10
 Release:	8
 License:	GPLv2
 Group:		System/Libraries
-Url:		http://www.oberhumer.com/opensource/lzo/
+Url:		https://www.oberhumer.com/opensource/lzo/
 Source0:	http://www.oberhumer.com/opensource/lzo/download/%{name}-%version.tar.gz
 Source1:	%{name}.rpmlintrc
 Patch0:		lzo-2.07-buildfix.patch
