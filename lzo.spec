@@ -27,6 +27,11 @@ Source0:	http://www.oberhumer.com/opensource/lzo/download/%{name}-%version.tar.g
 Source1:	%{name}.rpmlintrc
 Patch0:		lzo-2.07-buildfix.patch
 %if %{with compat32}
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	libc6
 %endif
 
