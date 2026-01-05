@@ -19,7 +19,7 @@
 Summary:	Data compression library with very fast (de-)compression
 Name:		lzo
 Version:	2.10
-Release:	8
+Release:	9
 License:	GPLv2
 Group:		System/Libraries
 Url:		https://www.oberhumer.com/opensource/lzo/
@@ -30,7 +30,6 @@ Patch0:		lzo-2.07-buildfix.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool-base
-BuildRequires:	slibtool
 BuildRequires:	make
 BuildRequires:	libc6
 %endif
@@ -97,6 +96,9 @@ still decompressing at this very high speed.
 
 %prep
 %autosetup -n lzo-%{version} -p1
+# For some reason lzo fails with slibtool
+export LIBTOOLIZE=libtoolize
+autoupdate
 autoreconf -fi
 export CONFIGURE_TOP="$(pwd)"
 
